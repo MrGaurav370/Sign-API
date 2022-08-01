@@ -1,0 +1,87 @@
+<div class="container">
+  <div class="nav-container col-md-12">
+  <nav class="navbar navbar-fixed-top">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <a class="navbar-brand active" href="knowl.html">Dashboard</a>
+      </div>
+      <ul class="nav navbar-center">
+        <div class="search-container">
+          <input class="search-container" type="text" placeholder="Search..." style="border: 1px solid; border-radius: 10px; padding: 10px;"/>
+          <span><a href="https://www.google.com/"><input type="image" src="../../assets/search.svg" /></a></span>
+          <!-- <button>Log Out</button> -->
+        </div>
+      </ul>
+      <ul class="nav navbar-right" style="display: flex">
+        <li>
+          <a href="#"><img src="./../../assets/pencil-fill.svg" alt="Edit"/></a>
+        </li>
+        <li>
+          <a href="#"><img src="./../../assets/bell-fill.svg" alt="Login" />
+          </a>
+        </li>
+        <li>
+          <a href="#"><img src="./../../assets/people-fill.svg" alt="Sign Up" />
+          </a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+  <nav>
+    <div id="mySidebar" class="sidebar bg-light">
+      <!-- <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a> -->
+      <a href=""><input type="image" src="../../assets/menu-button-wide-fill.svg"/></a>
+      <a href="#"><input type="image" src="../../assets/file-person-fill.svg"/></a>
+      <a href="#"><input type="image" src="../../assets/tools.svg" /></a>
+      <a href="#"><input type="image" src="../../assets/people-fill.svg" /></a>
+      <a href="#"><input type="image" src="../../assets/telephone-fill.svg"/></a>
+    </div>
+  </nav>
+</div>
+<div class="p-4">
+  <div class="container col-md-3">
+    <h1>Hi</h1>
+    <p>You're logged In</p>
+  </div>
+</div>
+<div class="table-container col-md-12">
+  <table>
+    <thead>
+      <h3>GET table</h3>
+      <button class="btn btn-primary" (click)="addUser(userInfo)">Add User</button>
+      <tr>
+        <th>id</th>
+        <th>first_name</th>
+        <th>last_name</th>
+        <th>email</th>
+        <th>avatar</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let user of userInfo.data">
+        <th>{{ user.id }}</th>
+        <td class="col-md-2">
+         <span *ngIf="!user.isEditable"> {{ user.first_name }}</span>
+          <input type="text" placeholder="first name" class="form-control" *ngIf="user.isEditable"  [(ngModel)]="user.first_name" />
+        </td>
+        <td class="col-md-2">
+          <span *ngIf="!user.isEditable">{{ user.last_name }}</span>
+          <input type="text" placeholder="last name" class="form-control" *ngIf="user.isEditable" [(ngModel)]="user.last_name" />
+        </td>
+        <td class="col-md-2">
+          <span *ngIf="!user.isEditable">{{ user.email }}</span>
+          <input type="email" placeholder="email" class="form-control" *ngIf="user.isEditable" [(ngModel)]="user.email" />
+        </td>
+        <td class="col-md-2">{{ user.avatar }}</td>
+        <td class="col-md-2">
+          <button class="btn btn-info" *ngIf="!user.isEditable" (click)="updateUser(user)">Edit</button>
+          <button class="btn btn-info" *ngIf="user.isEditable" (click)="saveData(user)">Save</button>
+          <button class="btn btn-danger" *ngIf="user.isEditable" (click)="cancelUpdate(user)">Cancel</button>
+          <button class="btn btn-warning" *ngIf="!user.isEditable" (click)="deleteUser()">delete</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+</div>
